@@ -8,6 +8,8 @@ import classes from "./ContainerLayout.module.css"
 const ContentLayout = () => {
     const navigate = useNavigate();
     const itemsPerPage = 4
+    const [indexDelete, setIndexDelete] = useState(0);
+    const [showErrorMessage, setShowErrorMessage] = useState(false);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
     const [listOfUsers, setListOfUsers] = useContext(UserProvider);
@@ -32,15 +34,14 @@ const ContentLayout = () => {
                     // Set total pages for pagination
                     setTotalPages(Math.ceil(users.length / itemsPerPage))
                 })
-        } else { // If there is an update
-            setDataUser(listOfUsers)
         }
     }, []);
 
-    useEffect(() => {
+    useEffect(() => { // If there is an update
+        setDataUser(listOfUsers);
         // Set total pages for pagination
         setTotalPages(Math.ceil(dataUser.length / itemsPerPage))
-    }, [dataUser]);
+    }, [dataUser.length, listOfUsers]);
 
     const startIndex = currentPage * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -56,11 +57,23 @@ const ContentLayout = () => {
             method:"DELETE"
         })
             .then(res=>res.json())
-            .then(json=>console.log(`Delete user index: ${index} Success`))
+            .then(json=>{
+                setListOfUsers(existingItems => {
+                    return [
+                        ...existingItems.slice(0, index - 1),
+                        ...existingItems.slice(parseInt(index, 10))
+                    ]
+                  })
+                setShowErrorMessage(true);
+                setTimeout(function(){ setShowErrorMessage(false); }, 2000);
+                setIndexDelete(index)
+                console.log(`Delete user index: ${index} Success`)
+            })
     }
 
 	return (
 		<div>
+            {indexDelete !== 0 && showErrorMessage && <h2 style={{ fontWeight: 600, fontSize: '22px', color: 'red' }}>{`Delete user index: ${indexDelete} Success`}</h2>}
             <table className="table">
                 <thead>
                     <tr>

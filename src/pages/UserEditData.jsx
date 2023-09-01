@@ -10,7 +10,7 @@ const UserEditData = () => {
     const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState(false)
     const [userDetail, setUserDetail] = useState();
-    const [listOfUsers, setListOfUsers] = useContext(UserProvider);
+    const [setListOfUsers] = useContext(UserProvider);
 
     const {
 		register,
