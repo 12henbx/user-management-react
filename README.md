@@ -1,6 +1,13 @@
-# Getting Started with Create React App
+# Getting Started
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. Halaman Login
+ login sesuai dengan username dan password yang tersedia pada placeholder
+2. Halaman User
+Setelah akan mendapat halaman List Users
+3. Halaman Detail User
+Detail akan terbuka setelah klik nama user
+4. Halaman Add/Edit User
+Halaman edit akan terbuka setelah klik edit button di kanan list
 
 ## Available Scripts
 
