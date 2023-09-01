@@ -31,6 +31,7 @@ const ContentLayout = () => {
                     setTotalPages(Math.ceil(users.length / itemsPerPage))
                 })
         } else { // If there is an update
+            console.log(listOfUsers);
             setDataUser(listOfUsers)
             // Set total pages for pagination
             setTotalPages(Math.ceil(dataUser.length / itemsPerPage))

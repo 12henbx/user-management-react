@@ -74,7 +74,27 @@ const UserEditData = () => {
             setListOfUsers(existingItems => {
                 return [
                     ...existingItems.slice(0, userId - 1),
-                    Object.keys(json).length === 0 ? undefined : json, // insert updated input
+                        {
+                        id: userId,
+                        email: data?.email,
+                        username: userDetail?.username,
+                        password: userDetail?.password,
+                        name:{
+                            firstname: data?.firstname,
+                            lastname: data?.lastname
+                        },
+                        address: {
+                            city: data?.city,
+                            street: data?.address,
+                            number: userDetail?.address.number,
+                            zipcode: userDetail?.address.zipcode,
+                            geolocation:{
+                                lat: userDetail?.address?.geolocation?.lat,
+                                long: userDetail?.address?.geolocation?.long,
+                            }
+                        },
+                        phone: data?.phone,
+                    }, // insert updated input
                     ...existingItems.slice(parseInt(userId, 10))
                 ]
               })
