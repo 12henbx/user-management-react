@@ -1,4 +1,4 @@
-import { Routes, Route, BrowserRouter } from 'react-router-dom'
+import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom'
 import { useContext, useState } from 'react'
 import AuthContext from './store/auth-context'
 import UserProvider from './store/user-context'
@@ -23,17 +23,16 @@ function App() {
 				{/* {cartIsShown && <Cart onClose={hideCartHandler} />} */}
         <BrowserRouter>
           <Routes>
-            {/* {!authCtx.isLoggedIn && <Route path='/' element={<Login />} />} */}
             {authCtx.isLoggedIn && <Route path='/' element={<Home />} />}
             <Route path='/' element={<Home />} />
-            {/* <Route path='/about' element={<About />} />
-            <Route path='/contact' element={<Contact />} /> */}
-            <Route path='/login' element={<Login />} />
+            {authCtx.isLoggedIn && <Route path='/login' element={<Navigate to='/' />} />}
             {authCtx.isLoggedIn && <Route path='*' element={<Home />} />}
-            <Route path="/users/:userId" element={<UserDetail />} />
-            <Route path="/user/edit/:userId" element={<UserEditData />} />
-            {/* {!authCtx.isLoggedIn && <Route path='*' element={<Navigate to='/login' />} />} */}
-            {/* {authCtx.isLoggedIn && <Route path='/products/:productId' element={<StoreDetail />} />} */}
+            {authCtx.isLoggedIn && <Route path="/users/:userId" element={<UserDetail />} />}
+            {authCtx.isLoggedIn && <Route path="/user/edit/:userId" element={<UserEditData />} />}
+            {authCtx.isLoggedIn && <Route path='*' element={<Navigate to='/' />} />}
+            {!authCtx.isLoggedIn && <Route path='/' element={<Navigate to='/login' />} />}
+            {!authCtx.isLoggedIn && <Route path='/login' element={<Navigate to='/login' />} />}
+            {!authCtx.isLoggedIn && <Route path='*' element={<Navigate to='/login' />} />}
           </Routes>
         </BrowserRouter>
 			</Wrapper>

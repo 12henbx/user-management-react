@@ -7,6 +7,7 @@ import classes from './AuthForm.module.css'
 
 const AuthForm = props => {
 	const [isLoading, setIsLoading] = useState(false)
+    const [isErrorLogin, setIsErrorLogin] = useState(false)
 
 	const authCtx = useContext(AuthContext)
 
@@ -42,7 +43,7 @@ const AuthForm = props => {
                 authCtx.login(json)
 				navigate('/')
             })
-            .catch(e => console.error(`error ${e}`))
+            .catch(e => setIsErrorLogin(true))
 	}
 
 	return (
@@ -77,6 +78,8 @@ const AuthForm = props => {
 					/>
 
 					<p>{errors.password?.message}</p>
+
+                    <h4 style={{ color: 'red' }}>{isErrorLogin && 'Login Gagal'}</h4>
 
 					{!isLoading && (
 						<button className={classes['form-btn']} type='submit'>
