@@ -1,0 +1,58 @@
+.card {
+	margin-top: 10em;
+	max-width: 100%;
+	margin: 3em auto;
+}
+
+.heading {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	margin-top: 2em;
+	font-size: 1.5rem;
+}
+
+.form {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding: 2em;
+	height: 100%;
+}
+
+.form input {
+	padding: 0.7em;
+	width: 100%;
+	margin: 1.2em;
+}
+
+.form p {
+	text-align: center;
+}
+
+.form-btn {
+	margin-top: 1em;
+	padding: 0.6em 2em;
+	color: white;
+    background-color: black;
+}
+
+@media (min-width: 600px) {
+	.card {
+		max-width: 80%;
+	}
+}
+
+@media (min-width: 900px) {
+	.card {
+		max-width: 50%;
+	}
+}
+
+@media (min-width: 900px) {
+	.card {
+		max-width: 40%;
+	}
+}
