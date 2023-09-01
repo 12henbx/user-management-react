@@ -3,6 +3,8 @@ import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 import UserProvider from "../../store/user-context";
 
+import classes from "./ContainerLayout.module.css"
+
 const ContentLayout = () => {
     const navigate = useNavigate();
     const itemsPerPage = 4
@@ -31,12 +33,14 @@ const ContentLayout = () => {
                     setTotalPages(Math.ceil(users.length / itemsPerPage))
                 })
         } else { // If there is an update
-            console.log(listOfUsers);
             setDataUser(listOfUsers)
-            // Set total pages for pagination
-            setTotalPages(Math.ceil(dataUser.length / itemsPerPage))
         }
     }, []);
+
+    useEffect(() => {
+        // Set total pages for pagination
+        setTotalPages(Math.ceil(dataUser.length / itemsPerPage))
+    }, [dataUser]);
 
     const startIndex = currentPage * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -87,8 +91,11 @@ const ContentLayout = () => {
             </table>
 
             <ReactPaginate
-            containerClassName={"pagination-container"}
-            activeClassName={"active-page"}
+                containerClassName={classes.pagination}
+                activeClassName={classes.active}
+                pageClassName={classes.item}
+                previousClassName={classes.previous}
+                nextClassName={classes.next}
                 pageCount={totalPages}
                 onPageChange={handlePageChange}
                 forcePage={currentPage}
